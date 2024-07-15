@@ -8,7 +8,7 @@
  DigitalOut ventilador(D4);
  DigitalIn boton_buzzer(BUTTON1); 
  DigitalIn boton_ventilador(D6);
- //*************************************************************************//
+ //************************************************************************//
 
 // *********Variables de debounce*******************************************//
 Ticker ticker1;                     //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del ventilador.
