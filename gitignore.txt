@@ -1,8 +1,0 @@
-BUILD
-.mbed
-compile_commands.json
-.clangd
-.cache
-mbed-os
-DHT11
-mbed-dht
