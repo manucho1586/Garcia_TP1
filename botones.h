@@ -18,7 +18,7 @@ extern Ticker ticker1;                 //Instanciación de variable tipo Ticker 
 extern Ticker ticker2;                 //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del buzzer.
 extern void temporizador_botones(void);
  
- extern void check_boton_buzzer();
- extern void check_boton_ventilador();
+extern void check_boton_buzzer(void);
+extern void check_boton_ventilador(void);
 
 #endif //BOTONES_H
