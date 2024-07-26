@@ -10,6 +10,13 @@
 int main()
 {
 
+    // Configuración de interrupciones de los botones
+    boton_prueba_buzzer.fall(&manejar_boton_prueba_buzzer);
+    boton_prueba_buzzer.rise(&manejar_boton_prueba_buzzer);
+    boton_prueba_ventilador.fall(&manejar_boton_prueba_ventilador);
+    boton_prueba_ventilador.rise(&manejar_boton_prueba_ventilador);
+
+    
     inicializacion_uart();
     temporizador_botones();
 
@@ -44,5 +51,17 @@ int main()
 ///***************************************************************///       
         delay(1); //delay de 1 ms
         tiempo_acumulado=tiempo_acumulado + tiempo_incremento;
+
+
+
+        controlar_invernadero();
+        if (boton_prueba_buzzer_presionado()) 
+        {
+            cambiar_estado(PRUEBA_MANUAL_BUZZER);
+        } else if (boton_prueba_ventilador_presionado()) 
+        {
+            cambiar_estado(PRUEBA_MANUAL_VENTILADOR);
+        }
+        thread_sleep_for(50); // Ajusta el tiempo de espera según sea necesario
     }
 }
