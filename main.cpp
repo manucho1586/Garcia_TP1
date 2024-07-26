@@ -5,20 +5,25 @@
 #include "botones.h"
 #include "lectura_temp.h"
 #include "impresion_uart.h"
+#include "funciones.h"
+
+
+
+void controlar_invernadero(void);
+
 
 
 int main()
 {
 
-    // Configuración de interrupciones de los botones
+    //config_interrup_botones();
     boton_prueba_buzzer.fall(&manejar_boton_prueba_buzzer);
     boton_prueba_buzzer.rise(&manejar_boton_prueba_buzzer);
     boton_prueba_ventilador.fall(&manejar_boton_prueba_ventilador);
     boton_prueba_ventilador.rise(&manejar_boton_prueba_ventilador);
 
-    
-    inicializacion_uart();
-    temporizador_botones();
+    //inicializacion_uart();
+    //temporizador_botones();
 
 //**********Declaracion de entradas y salidas*******************************//
     //DHT11 sensordht(D2);                           //Instancia de una variable de tipo DHT11.
@@ -39,8 +44,8 @@ int main()
     //int cont=0;                                  //Contador para función antirrebote al presionar botones.
     //LED_rojo=OFF;                                  //LED indicador de alarma.
     //LED_verde=ON;                                  //LED indicador de funcionamiento en condiciones normales.
-    ventilador=LOW;         
-    buzzer=LOW;                                    //Apagado
+    //ventilador=LOW;         
+    //buzzer=LOW;                                    //Apagado
 //***************************************************************************//
 
 //************************LOOP PRINCIPAL*************************************//
@@ -63,5 +68,61 @@ int main()
             cambiar_estado(PRUEBA_MANUAL_VENTILADOR);
         }
         thread_sleep_for(50); // Ajusta el tiempo de espera según sea necesario
+    }
+}
+
+
+// Función principal de control del invernadero
+void controlar_invernadero(void) 
+{
+    switch (estado_actual) 
+    {
+        case INICIAL:
+            if (temperatura_dentro_rango()) 
+            {
+                cambiar_estado(OPTIMO);
+            } else if (temperatura_sobre_umbral()) 
+            {
+                cambiar_estado(ALARMA);
+            }
+            break;
+
+        case OPTIMO:
+            LED_verde=ON;
+            LED_rojo=OFF;
+            buzzer=LOW;
+            ventilador=LOW;
+            if (temperatura_sobre_umbral()) 
+            {
+                cambiar_estado(ALARMA);
+            }
+            break;
+
+        case ALARMA:
+            LED_verde=OFF;
+            LED_rojo=ON;
+            buzzer=HIGH;
+            ventilador=HIGH;
+            if (temperatura_dentro_rango()) 
+            {
+                cambiar_estado(OPTIMO);
+            }
+            break;
+
+        case PRUEBA_MANUAL_BUZZER:
+            buzzer=HIGH;
+            if (!boton_prueba_buzzer_presionado()) 
+            {
+                cambiar_estado(estado_anterior);
+            }
+            break;
+
+        case PRUEBA_MANUAL_VENTILADOR:
+            ventilador=HIGH;
+            if (!boton_prueba_ventilador_presionado()) 
+            {
+                cambiar_estado(estado_anterior);
+            }
+            break;
     }
 }

@@ -1,16 +1,17 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+#include "mbed.h"
 
 // Definición de pines (ajusta estos pines según tu hardware)
-#define PIN_BOTON_PRUEBA_BUZZER PB_0 // Cambia a tu pin específico
-#define PIN_BOTON_PRUEBA_VENTILADOR PB_1 // Cambia a tu pin específico
+#define PIN_BOTON_PRUEBA_BUZZER BUTTON1 // Cambia a tu pin específico
+#define PIN_BOTON_PRUEBA_VENTILADOR D6 // Cambia a tu pin específico
 // Configuración de objetos
-InterruptIn boton_prueba_buzzer(PIN_BOTON_PRUEBA_BUZZER);
-InterruptIn boton_prueba_ventilador(PIN_BOTON_PRUEBA_VENTILADOR);
-bool sobretemp=false;
+extern InterruptIn boton_prueba_buzzer;
+extern InterruptIn boton_prueba_ventilador;
+extern bool sobretemp;
 
-// Estado del sistema
+//Estado del sistema
 enum Estado {
     INICIAL,
     OPTIMO,
@@ -19,27 +20,20 @@ enum Estado {
     PRUEBA_MANUAL_VENTILADOR
 };
 
-Estado estado_actual = INICIAL;
-Estado estado_anterior = INICIAL;
-volatile bool boton_prueba_buzzer_estado = false;
-volatile bool boton_prueba_ventilador_estado = false;
+extern Estado estado_actual;
+extern Estado estado_anterior;
+extern volatile bool boton_prueba_buzzer_estado;
+extern volatile bool boton_prueba_ventilador_estado;
 
 // Prototipos de funciones
-void cambiar_estado(Estado nuevo_estado);
-void controlar_invernadero();
-bool temperatura_dentro_rango();
-bool temperatura_sobre_umbral();
-bool boton_prueba_buzzer_presionado();
-bool boton_prueba_ventilador_presionado();
-void encender_led_verde();
-void apagar_led_verde();
-void encender_led_rojo();
-void apagar_led_rojo();
-void encender_buzzer();
-void apagar_buzzer();
-void encender_ventilador();
-void apagar_ventilador();
-void manejar_boton_prueba_buzzer();
-void manejar_boton_prueba_ventilador();
+extern void cambiar_estado(Estado nuevo_estado);
+//extern void controlar_invernadero(void);
+extern bool temperatura_dentro_rango(void);
+extern bool temperatura_sobre_umbral(void);
+extern bool boton_prueba_buzzer_presionado(void);
+extern bool boton_prueba_ventilador_presionado(void);
+extern void manejar_boton_prueba_buzzer(void);
+extern void manejar_boton_prueba_ventilador(void);
+//extern void config_interrup_botones(void);
 
 #endif //FUNCIONES_H
