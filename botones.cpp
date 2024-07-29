@@ -1,37 +1,23 @@
-#include "mbed.h"
-#include "dht11.h"
-#include "arm_book_lib.h"
-#include <cstdint>
 #include "botones.h"
 
-Ticker ticker1;                 //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del ventilador.
-Ticker ticker2;                 //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del buzzer.
+Ticker ticker1;  //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del ventilador.
+Ticker ticker2;  //Instanciación de variable tipo Ticker para manejar la función de presioanr el botón del buzzer.
 
-//**********Declaracion de botones buzzer y ventilador**********************//
- DigitalOut buzzer(D5);
- DigitalOut ventilador(D4);
- DigitalIn boton_buzzer(BUTTON1); 
- DigitalIn boton_ventilador(D6);
- //************************************************************************//
+//**********Declaracion de botones buzzer y ventilador*********************************************//
+DigitalOut buzzer(D5);
+DigitalOut ventilador(D4);
+DigitalIn boton_buzzer(BUTTON1); 
+DigitalIn boton_ventilador(D6); 
+ //************************************************************************************************//
 
- // *********Variables de debounce*******************************************//
+ // *********Variables de debounce*****************************************************************//
 volatile int cont1 = 0;             //Contador de retardo cuando se presiona el botón ventilador.
 volatile bool checking1 = false;    //Variable que chequea el estado del botón que se presiona.
 volatile int cont2 = 0;             //Contador de retardo cuando se presiona el botón buzzer.
 volatile bool checking2 = false;    //Variable que chequea el estado del botoón que se presiona.
- //*************************************************************************//
+ //************************************************************************************************//
 
-UnbufferedSerial pc(USBTX, USBRX);
-void inicializacion_uart(void)
- {
-//***********Inicialización de comunicación serie***************************//
-
-    pc.baud(9600);
-    pc.format(8, SerialBase::None, 1);
-//**************************************************************************//
- }
-
- // *********Deteccion de estado y activacion/desactivacion de buzzer********//
+ // *********Deteccion de estado y activacion/desactivacion de buzzer******************************//
 void check_boton_buzzer()
  {
     if (boton_buzzer == 0) {                                // Botón presionado
@@ -51,9 +37,9 @@ void check_boton_buzzer()
         cont1 = 0;                                          // Reiniciar el contador
     }
 }
-//*************************************************************************//
+//*************************************************************************************************//
 
-// ******Deteccion de estado y activacion/desactivacion de ventilador******//
+// ******Deteccion de estado y activacion/desactivacion de ventilador******************************//
 void check_boton_ventilador() 
 {
     if (boton_ventilador == 0) {                            // Botón presionado
@@ -73,13 +59,13 @@ void check_boton_ventilador()
         cont2 = 0;                                          // Reiniciar el contador
     }
 }
-//*************************************************************************//
+//*************************************************************************************************//
 
-void temporizador_botones(void)
+void chequeo_botones_presionados(void)
 {
-//***********LLamado a las funciones cada 1 ms******************************//
+//***********LLamado a las funciones cada 1 ms*****************************************************//
     ticker1.attach(&check_boton_ventilador, 0.001);   //Se configura ticker1 para llamar a la funcion cada 1 ms.
     ticker2.attach(&check_boton_buzzer, 0.001);       //Se configura ticker2 para llamar a la funcion cada 1 ms.
-//*************************************************************************//
+//*************************************************************************************************//
 
 }

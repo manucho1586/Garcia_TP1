@@ -1,19 +1,17 @@
-#include "mbed.h"
 #include "dht11.h"
 #include "arm_book_lib.h"
-#include <cstdint>
 #include "botones.h"
 #include "lectura_temp.h"
 
-
-DHT11 sensordht(D2);                           //Instancia de una variable de tipo DHT11.
-DigitalOut LED_rojo(LED1);                     //LED indicador de sobretemperatura.
-DigitalOut LED_verde(D3);                      // LED indicador de condiciones de
+//***************Declaración de variables e inicialización de entradas-salidas*****************//
+DHT11 sensordht(D2);                            //Instancia de una variable de tipo DHT11.
+DigitalOut LED_rojo(LED1);                      //LED indicador de sobretemperatura.
+DigitalOut LED_verde(D3);                       // LED indicador de condiciones de
                                                 // temperatura y humedad normales.
-int umbral=22;                                 //Valor umbral de temperatura.
+int umbral=22;                                  //Valor umbral de temperatura.
+//********************************************************************************************//
 
-
-void lectura_sensor(void)
+void control_invernadero(void)
 {
     if(sensordht.readTemperature()>umbral)     //Condición de sobretemperatura.
     {
