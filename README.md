@@ -11,7 +11,7 @@ Se pudo cumplir con el funcionamiento planteado, el cual era imprimir los valore
 
 **Captura del monitor de la comunicación serie:**  
   
-![Captura](file:///D:/Curso%20de%20Sistemas%20Embebidos%20FIUBA/TP's/Resolución%20del%20TP/Captura.PNG)
+![](https://github.com/manucho1586/garcia_tp1/blob/tp2/captura.png)
 
 Para ver video del funcionamiento del sistema implementado: 
 https://drive.google.com/drive/u/0/folders/1Rxv_zzBpI5dtSBoAziEq5WgmIlY6Kuhn
