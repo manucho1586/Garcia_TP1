@@ -1,6 +1,7 @@
-# **<u>Trabajo Práctico N° 1</u>**
+# **<u>Trabajo Práctico N° 2</u>**
 ___
-Para este primer trabajo se tuvieron en cuenta los 3 primeros cápitulos del libro utilizado en el curso, donde se abordaron temas como manejo entradas y salidas digitales, manejo del tiempo de ejecucion y retardos por software y señales analógicas, también otros puntos importantes como modularización y forma prolija de escribir el código fuente para que pueda ser más mantenible y reutilizable.
+En este segundo trabajo prático se siguió trabajando sobre la misma temática del trabajo práctico N°1, agregandole contenidos tratados en los capítulo 4 y 5, los cuales eran modularización de archivos y máquinas de estado finito.
+Para cumplir con los objetivos consignados, se dividió en un archivo.cpp los botones (botones.cpp), en otro la comunicación a través de la UART (impresion_uart.cpp) y en otro archivo el funcionamiento del sistema (temp_lectura.cpp). Para comentar de manera breve, en el archivo temp_lectura.cpp se encuentra dentro de una función la estructura que emula a una maquina de dos estados, vale aclarar que dicha estructura, no es un switch case sino simplemente un if/else.
 
 Para poder llevar a cabo el objetivo planteado en la consigna del trabajo práctico, se trabajó con una libreria para el sensor de temperatura y humedad DHT11. En el siguiente link se encuentra el repositorio original del código utilizado:
 
