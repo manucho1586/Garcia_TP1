@@ -11,7 +11,7 @@ Se pudo cumplir con el funcionamiento planteado, el cual era imprimir los valore
 
 **Captura del monitor de la comunicación serie:**  
   
-![](https://github.com/manucho1586/garcia_tp1/blob/tp2/captura.png)
+https://github.com/manucho1586/Garcia_TP1/blob/TP2/Captura.PNG
 
 Para ver video del funcionamiento del sistema implementado: 
 https://drive.google.com/drive/u/0/folders/1Rxv_zzBpI5dtSBoAziEq5WgmIlY6Kuhn
